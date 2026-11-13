@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level 5: Misi Detektif Cerita - Bagian A4 Cocokkan Bukti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #7A2E78;
+      --primary-hover: #622260;
+      --text-main: #1B2540;
+      --tokoh-bg: #DCE8FC;
+      --tokoh-border: #2F6FDE;
+      --konflik-bg: #FBE1DE;
+      --konflik-border: #C93B2E;
+      --penyelesaian-bg: #D8F1E4;
+      --penyelesaian-border: #17804F;
+      --pesan-bg: #FFEFC2;
+      --pesan-border: #9A6A00;
+      --wood-trunk: #795032;
+      --wood-branch: #8E6240;
+      --wood-light: #F7EFE5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: var(--text-main);
+      font-size: 18px;
+      line-height: 1.45;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #E3F3E4 0%, #F5F7E8 55%, #FDF8EB 100%);
+      position: relative;
+      overflow-x: hidden;
+      padding: 16px;
+    }
+
+    /* Hiasan Latar Hutan SVG & Daun Halus */
+    .forest-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .tree-left {
+      position: absolute;
+      bottom: 0;
+      left: -30px;
+      width: 170px;
+      opacity: 0.22;
+    }
+
+    .tree-right {
+      position: absolute;
+      bottom: 0;
+      right: -30px;
+      width: 180px;
+      opacity: 0.22;
+    }
+
+    .firefly {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #FFE66D;
+      box-shadow: 0 0 10px 4px rgba(255, 230, 109, 0.7);
+      animation: floatFirefly 4s ease-in-out infinite alternate;
+    }
+
+    .falling-leaf {
+      position: absolute;
+      top: -30px;
+      width: 24px;
+      height: 24px;
+      opacity: 0.45;
+      animation: fallLeaf 12s linear infinite;
+    }
+
+    @keyframes floatFirefly {
+      0% { transform: translate(0, 0) scale(0.9); opacity: 0.5; }
+      100% { transform: translate(12px, -16px) scale(1.1); opacity: 0.95; }
+    }
+
+    @keyframes fallLeaf {
+      0% { transform: translateY(-20px) rotate(0deg); }
+      100% { transform: translateY(105vh) rotate(260deg); }
+    }
+
+    /* Kontainer Utama */
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Header & Olie */
+    header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .title-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .badge {
+      background: #EFE0EF;
+      color: var(--primary);
+      font-weight: 800;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 16px;
+      border: 2px solid var(--primary);
+    }
+
+    h1 {
+      color: var(--primary);
+      font-size: clamp(24px, 3.2vw, 32px);
+      font-weight: 800;
+    }
+
+    /* Maskot Olie */
+    .olie-box {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #FFFFFF;
+      border: 3px solid #D8E6D5;
+      border-radius: 20px;
+      padding: 12px 18px;
+      box-shadow: 0 4px 12px rgba(27, 37, 64, 0.06);
+    }
+
+    .olie-avatar {
+      width: 68px;
+      height: 68px;
+      flex-shrink: 0;
+      transform-origin: bottom center;
+    }
+
+    .olie-avatar.nod {
+      animation: olieNod 0.55s ease-in-out;
+    }
+
+    .olie-avatar.tilt {
+      animation: olieTilt 0.55s ease-in-out;
+    }
+
+    @keyframes olieNod {
+      0%, 100% { transform: rotate(0deg) translateY(0); }
+      35% { transform: rotate(-6deg) translateY(4px); }
+      70% { transform: rotate(4deg) translateY(-2px); }
+    }
+
+    @keyframes olieTilt {
+      0%, 100% { transform: rotate(0deg); }
+      30% { transform: rotate(-10deg); }
+      70% { transform: rotate(8deg); }
+    }
+
+    .speech-content {
+      flex: 1;
+    }
+
+    .olie-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .olie-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .feedback-alert {
+      margin-top: 8px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 700;
+      display: none;
+    }
+
+    .feedback-alert.show {
+      display: block;
+    }
+
+    .feedback-alert.warn {
+      background: #FFF3DC;
+      border-left: 5px solid #D97706;
+      color: #1B2540;
+    }
+
+    .feedback-alert.success {
+      background: #E2F6EB;
+      border-left: 5px solid #17804F;
+      color: #1B2540;
+    }
+
+    /* Area Pohon & Tabel Dahan */
+    .tree-wrapper {
+      position: relative;
+      background: #FFFFFF;
+      border-radius: 24px;
+      border: 3px solid #C9DEC8;
+      padding: 18px 16px 22px;
+      box-shadow: 0 8px 20px rgba(27, 37, 64, 0.07);
+    }
+
+    /* Siluet Batang Pohon di Belakang Dahan */
+    .trunk-pillar {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      background: repeating-linear-gradient(
+        90deg,
+        #8D6242 0px,
+        #7B5235 12px,
+        #8D6242 24px
+      );
+      opacity: 0.25;
+      border-radius: 8px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .table-header {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 155px 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 0 4px;
+    }
+
+    .col-title {
+      background: #F1F5EE;
+      border: 2px solid #C8D9C5;
+      border-radius: 12px;
+      padding: 10px 12px;
+      text-align: center;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--text-main);
+    }
+
+    .branches-list {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .branch-row {
+      display: grid;
+      grid-template-columns: 155px 1fr 1fr;
+      gap: 12px;
+      align-items: stretch;
+      background: #FAF8F3;
+      border: 2px solid #D9CEBE;
+      border-radius: 18px;
+      padding: 10px;
+      position: relative;
+      transition: box-shadow 0.25s ease, background-color 0.25s ease;
+    }
+
+    /* Label Unsur */
+    .element-tag {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-radius: 14px;
+      padding: 10px 8px;
+      font-weight: 800;
+      font-size: 18px;
+      border-width: 3px;
+      border-style: solid;
+    }
+
+    .element-tag small {
+      font-size: 14px;
+      font-weight: 700;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+
+    .el-tokoh { background: var(--tokoh-bg); border-color: var(--tokoh-border); }
+    .el-konflik { background: var(--konflik-bg); border-color: var(--konflik-border); }
+    .el-penyelesaian { background: var(--penyelesaian-bg); border-color: var(--penyelesaian-border); }
+    .el-pesan { background: var(--pesan-bg); border-color: var(--pesan-border); }
+
+    /* Slot Target Dahan (Cerita 1) */
+    .drop-slot {
+      min-height: 76px;
+      border-radius: 14px;
+      border: 3px dashed #8B9BB4;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: #52607A;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+      position: relative;
+      font-family: inherit;
+    }
+
+    .drop-slot:focus-visible {
+      outline: 4px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    /* Sorot target yang siap menerima kartu */
+    .drop-slot.ready-target:not(.filled) {
+      border-style: solid;
+      box-shadow: 0 0 0 4px rgba(122, 46, 120, 0.22);
+      background: #FDF9FE;
+    }
+
+    .drop-slot.hover-target:not(.filled) {
+      transform: scale(1.02);
+      box-shadow: 0 0 14px rgba(122, 46, 120, 0.4);
+      border-color: var(--primary);
+    }
+
+    /* Dahan menyala dengan warna unsur saat terkunci */
+    .branch-row.solved-tokoh {
+      background: var(--tokoh-bg);
+      border-color: var(--tokoh-border);
+      box-shadow: 0 0 14px rgba(47, 111, 222, 0.35);
+    }
+    .branch-row.solved-konflik {
+      background: var(--konflik-bg);
+      border-color: var(--konflik-border);
+      box-shadow: 0 0 14px rgba(201, 59, 46, 0.35);
+    }
+    .branch-row.solved-penyelesaian {
+      background: var(--penyelesaian-bg);
+      border-color: var(--penyelesaian-border);
+      box-shadow: 0 0 14px rgba(23, 128, 79, 0.35);
+    }
+    .branch-row.solved-pesan {
+      background: var(--pesan-bg);
+      border-color: var(--pesan-border);
+      box-shadow: 0 0 14px rgba(154, 106, 0, 0.35);
+    }
+
+    .drop-slot.filled {
+      border-style: solid;
+      cursor: default;
+      color: var(--text-main);
+      font-weight: 700;
+      animation: bounceLock 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .drop-slot.filled[data-element="tokoh"] { background: #FFFFFF; border-color: var(--tokoh-border); }
+    .drop-slot.filled[data-element="konflik"] { background: #FFFFFF; border-color: var(--konflik-border); }
+    .drop-slot.filled[data-element="penyelesaian"] { background: #FFFFFF; border-color: var(--penyelesaian-border); }
+    .drop-slot.filled[data-element="pesan"] { background: #FFFFFF; border-color: var(--pesan-border); }
+
+    @keyframes bounceLock {
+      0% { transform: scale(0.92); }
+      55% { transform: scale(1.04); }
+      100% { transform: scale(1); }
+    }
+
+    /* Percikan daun saat benar */
+    .sparkle-burst {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sparkle-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50% 0 50% 0;
+      background: #2E9E5B;
+      animation: burstOut 0.6s ease-out forwards;
+    }
+
+    @keyframes burstOut {
+      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(0.4); opacity: 0; }
+    }
+
+    /* Kolom Cerita 2 (Kiki) */
+    .kiki-cell {
+      min-height: 76px;
+      border-radius: 14px;
+      border: 2px solid #D3DCE6;
+      background: #F4F7FA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .kiki-cell.mystery {
+      font-size: 24px;
+      font-weight: 800;
+      color: #64748B;
+      background: #EEF2F6;
+    }
+
+    /* Keranjang Daun (Kartu Bukti) */
+    .basket-section {
+      background: #F3EAD8;
+      border: 3px solid #C8B08A;
+      border-radius: 24px;
+      padding: 16px 18px 20px;
+      box-shadow: inset 0 3px 8px rgba(115, 82, 42, 0.1);
+    }
+
+    .basket-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-weight: 800;
+      font-size: 18px;
+      color: #5C3D1E;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+    }
+
+    /* Kartu Daun / Papan Kayu */
+    .evidence-card {
+      background: #FFFFFF;
+      border: 3px solid #7E9F66;
+      border-radius: 20px 6px 20px 6px;
+      padding: 14px 16px;
+      font-family: inherit;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+      text-align: left;
+      cursor: grab;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 10px rgba(27, 37, 64, 0.09);
+      touch-action: none;
+      user-select: none;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+      position: relative;
+    }
+
+    .evidence-card::before {
+      content: "";
+      width: 14px;
+      height: 14px;
+      border-radius: 14px 0 14px 0;
+      background: #68A357;
+      flex-shrink: 0;
+    }
+
+    .evidence-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 6px 14px rgba(27, 37, 64, 0.14);
+    }
+
+    .evidence-card:focus-visible {
+      outline: 4px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    .evidence-card.selected {
+      border-color: var(--primary);
+      background: #F9EFF9;
+      transform: scale(1.03);
+      box-shadow: 0 8px 18px rgba(122, 46, 120, 0.25);
+    }
+
+    .evidence-card.dragging-source {
+      opacity: 0.35;
+    }
+
+    .evidence-card.shake {
+      animation: cardShake 0.45s ease-in-out;
+      border-color: #D97706;
+      background: #FFF9EB;
+    }
+
+    @keyframes cardShake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-8px); }
+      40% { transform: translateX(8px); }
+      60% { transform: translateX(-6px); }
+      80% { transform: translateX(6px); }
+    }
+
+    /* Kartu Melayang saat Diseret Pointer */
+    .drag-clone {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: scale(1.06);
+      box-shadow: 0 14px 28px rgba(27, 37, 64, 0.25);
+      border-color: var(--primary);
+      background: #FFFFFF;
+      margin: 0;
+    }
+
+    /* Panel Selesai (Setelah Semua Benar) */
+    .completion-panel {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      background: #FFFFFF;
+      border: 3px solid var(--primary);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(122, 46, 120, 0.14);
+    }
+
+    .completion-panel.show {
+      display: flex;
+    }
+
+    .theme-box {
+      background: var(--pesan-bg);
+      border: 3px solid var(--pesan-border);
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .reflection-box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #F8FAFC;
+      border: 2px solid #CBD5E1;
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .reflection-box label {
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--text-main);
+    }
+
+    .reflection-box textarea {
+      width: 100%;
+      min-height: 92px;
+      border: 2px solid #94A3B8;
+      border-radius: 12px;
+      padding: 12px;
+      font-family: inherit;
+      font-size: 18px;
+      color: var(--text-main);
+      resize: vertical;
+    }
+
+    .reflection-box textarea:focus {
+      outline: 3px solid var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* Tombol Aksi */
+    .btn-primary {
+      align-self: flex-start;
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 24px;
+      min-height: 48px;
+      font-family: inherit;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .btn-primary:focus-visible {
+      outline: 4px solid #1B2540;
+      outline-offset: 2px;
+    }
+
+    /* Responsif untuk layar sempit (360px - 720px) */
+    @media (max-width: 720px) {
+      .table-header {
+        display: none;
+      }
+
+      .trunk-pillar {
+        width: 28px;
+      }
+
+      .branch-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 12px;
+      }
+
+      .element-tag {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 14px;
+      }
+
+      .drop-slot::before {
+        content: "Cerita 1 (Tuppy): ";
+        font-weight: 800;
+        color: var(--primary);
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .drop-slot {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: left;
+      }
+
+      .kiki-cell {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .kiki-cell::before {
+        content: "Cerita 2 (Kiki):";
+        font-size: 15px;
+        font-weight: 800;
+        color: #475569;
+        margin-bottom: 2px;
+      }
+
+      .olie-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* Hormati prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .falling-leaf, .firefly {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hiasan Hutan Latar -->
+  <div class="forest-bg" aria-hidden="true">
+    <svg class="tree-left" viewBox="0 0 200 400" fill="none">
+      <rect x="75" y="220" width="40" height="180" fill="#6D4C3D" />
+      <circle cx="95" cy="180" r="75" fill="#5D9C59" />
+      <circle cx="55" cy="220" r="55" fill="#4C8549" />
+      <circle cx="135" cy="215" r="55" fill="#6FB06B" />
+    </svg>
+    <svg class="tree-right" viewBox="0 0 200 400" fill="none">
+      <rect x="85" y="210" width="42" height="190" fill="#6D4C3D" />
+      <circle cx="105" cy="165" r="80" fill="#5D9C59" />
+      <circle cx="65" cy="210" r="60" fill="#6FB06B" />
+      <circle cx="145" cy="205" r="55" fill="#4C8549" />
+    </svg>
+    <div class="firefly" style="top: 14%; left: 8%;"></div>
+    <div class="firefly" style="top: 22%; right: 10%; animation-delay: 1.5s;"></div>
+    <svg class="falling-leaf" style="left: 12%;" viewBox="0 0 24 24">
+      <path d="M12 2C6 6 4 12 12 22C20 12 18 6 12 2Z" fill="#7AB369" />
+    </svg>
+    <svg class="falling-leaf" style="right: 14%; animation-delay: 5s;" viewBox="0 0 24 24">
+      <path d="M12 2C6 6 4 12 12 22C20 12 18 6 12 2Z" fill="#9BC56E" />
+    </svg>
+  </div>
+
+  <main class="container">
+    <header>
+      <div class="title-bar">
+        <span class="badge">Level 5: Misi Detektif Cerita</span>
+        <h1>Bagian A4: Cocokkan Bukti</h1>
+      </div>
+
+      <!-- Maskot Olie -->
+      <section class="olie-box" aria-label="Pesan dari Olie si burung hantu">
+        <svg id="olieAvatar" class="olie-avatar" viewBox="0 0 100 100" role="img" aria-label="Ilustrasi Olie si burung hantu">
+          <!-- Badan -->
+          <ellipse cx="50" cy="60" rx="30" ry="34" fill="#8C5E3C" />
+          <ellipse cx="50" cy="65" rx="20" ry="24" fill="#F6E5C8" />
+          <!-- Sayap -->
+          <path d="M20 52 C10 62, 14 80, 26 82 Z" fill="#6E472B" />
+          <path d="M80 52 C90 62, 86 80, 74 82 Z" fill="#6E472B" />
+          <!-- Telinga -->
+          <polygon points="26,32 34,16 42,30" fill="#6E472B" />
+          <polygon points="74,32 66,16 58,30" fill="#6E472B" />
+          <!-- Mata -->
+          <circle cx="38" cy="42" r="12" fill="#FFFFFF" stroke="#5A3821" stroke-width="2" />
+          <circle cx="62" cy="42" r="12" fill="#FFFFFF" stroke="#5A3821" stroke-width="2" />
+          <circle cx="39" cy="42" r="5" fill="#1B2540" />
+          <circle cx="61" cy="42" r="5" fill="#1B2540" />
+          <circle cx="41" cy="40" r="1.8" fill="#FFFFFF" />
+          <circle cx="63" cy="40" r="1.8" fill="#FFFFFF" />
+          <!-- Paruh -->
+          <polygon points="46,48 54,48 50,57" fill="#F29F05" />
+          <!-- Kaki -->
+          <path d="M38 92 L34 98 M42 92 L42 98 M58 92 L58 98 M62 92 L66 98" stroke="#F29F05" stroke-width="3" stroke-linecap="round" />
+        </svg>
+
+        <div class="speech-content">
+          <div class="olie-name">Olie si Burung Hantu</div>
+          <p id="olieMessage" class="olie-text">Cari bukti dari cerita Tuppy. Seret kartu ke dahan yang tepat.</p>
+          <div id="feedbackBox" class="feedback-alert" role="status" aria-live="polite"></div>
+        </div>
+      </section>
+    </header>
+
+    <!-- Pohon & Tabel 4 Dahan -->
+    <section class="tree-wrapper" aria-label="Pohon perbandingan cerita">
+      <div class="trunk-pillar" aria-hidden="true"></div>
+
+      <div class="table-header" aria-hidden="true">
+        <div class="col-title">Unsur Cerita</div>
+        <div class="col-title">Cerita 1 (Tuppy)</div>
+        <div class="col-title">Cerita 2 (Kiki)</div>
+      </div>
+
+      <div class="branches-list" id="branchesList">
+        <!-- Dahan 1: Tokoh -->
+        <div class="branch-row" id="row-tokoh">
+          <div class="element-tag el-tokoh">
+            <span>Tokoh</span>
+            <small>Biru</small>
+          </div>
+          <button type="button" class="drop-slot" data-target="tokoh" aria-label="Dahan Tokoh Cerita 1 Tuppy, kosong. Pilih kartu lalu tekan di sini.">
+            Letakkan kartu Tokoh di sini
+          </button>
+          <div class="kiki-cell" aria-label="Tokoh Cerita 2 Kiki">
+            Kiki si kelinci, Ruru si rusa, dan Kuro si kura-kura
+          </div>
+        </div>
+
+        <!-- Dahan 2: Konflik -->
+        <div class="branch-row" id="row-konflik">
+          <div class="element-tag el-konflik">
+            <span>Konflik</span>
+            <small>Merah Muda</small>
+          </div>
+          <button type="button" class="drop-slot" data-target="konflik" aria-label="Dahan Konflik Cerita 1 Tuppy, kosong. Pilih kartu lalu tekan di sini.">
+            Letakkan kartu Konflik di sini
+          </button>
+          <div class="kiki-cell mystery" aria-label="Konflik Cerita 2 Kiki, tanda tanya">?</div>
+        </div>
+
+        <!-- Dahan 3: Penyelesaian -->
+        <div class="branch-row" id="row-penyelesaian">
+          <div class="element-tag el-penyelesaian">
+            <span>Penyelesaian</span>
+            <small>Hijau</small>
+          </div>
+          <button type="button" class="drop-slot" data-target="penyelesaian" aria-label="Dahan Penyelesaian Cerita 1 Tuppy, kosong. Pilih kartu lalu tekan di sini.">
+            Letakkan kartu Penyelesaian di sini
+          </button>
+          <div class="kiki-cell mystery" aria-label="Penyelesaian Cerita 2 Kiki, tanda tanya">?</div>
+        </div>
+
+        <!-- Dahan 4: Pesan -->
+        <div class="branch-row" id="row-pesan">
+          <div class="element-tag el-pesan">
+            <span>Pesan</span>
+            <small>Kuning</small>
+          </div>
+          <button type="button" class="drop-slot" data-target="pesan" aria-label="Dahan Pesan Cerita 1 Tuppy, kosong. Pilih kartu lalu tekan di sini.">
+            Letakkan kartu Pesan di sini
+          </button>
+          <div class="kiki-cell mystery" aria-label="Pesan Cerita 2 Kiki, tanda tanya">?</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keranjang Daun (Kartu Bukti) -->
+    <section class="basket-section" id="basketSection" aria-label="Keranjang daun berisi kartu bukti">
+      <div class="basket-header">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2C6 6 4 12 12 22C20 12 18 6 12 2Z" fill="#5D9C59" />
+          <path d="M12 6V20" stroke="#F6E5C8" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <span>Keranjang Daun: Pilih atau seret kartu ke dahan di atas</span>
+      </div>
+      <div class="cards-grid" id="cardsGrid"></div>
+    </section>
+
+    <!-- Area Setelah Semua Benar -->
+    <section class="completion-panel" id="completionPanel" aria-label="Hasil akhir misi">
+      <div class="theme-box">
+        Persamaan tema: sama-sama tokoh yang sangat menginginkan sesuatu.
+      </div>
+
+      <div class="reflection-box">
+        <label for="reflectionInput">Pertanyaan Pemantik: Mengapa pesan kedua cerita bisa berbeda padahal temanya sama?</label>
+        <textarea id="reflectionInput" placeholder="Tulis pendapatmu di sini..."></textarea>
+      </div>
+
+      <button type="button" class="btn-primary" id="resetBtn">Ulangi</button>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const CARDS_DATA = [
+        {
+          id: "c1",
+          text: "Tuppy si tupai dan Bumi si beruang",
+          type: "tokoh",
+          isDistractor: false
+        },
+        {
+          id: "c2",
+          text: "Tuppy sangat ingin apel emas dan terburu-buru sampai tidak melihat dahan yang rapuh",
+          type: "konflik",
+          isDistractor: false
+        },
+        {
+          id: "c3",
+          text: "Tuppy memeriksa dahan satu per satu dan memanjat dengan hati-hati",
+          type: "penyelesaian",
+          isDistractor: false
+        },
+        {
+          id: "c4",
+          text: "Jangan terburu-buru, berhenti sejenak untuk berpikir sebelum bertindak",
+          type: "pesan",
+          isDistractor: false
+        },
+        {
+          id: "c5",
+          text: "Hutan Ceria yang rindang",
+          type: "distractor",
+          isDistractor: true,
+          distractorFeedback: "Itu tempat (latar), bukan tokoh atau kejadian masalah."
+        },
+        {
+          id: "c6",
+          text: "Dahan patah dan Tuppy hampir jatuh",
+          type: "distractor",
+          isDistractor: true,
+          distractorFeedback: "Itu akibat dari tindakan Tuppy, bukan masalah atau pilihan sulitnya."
+        }
+      ];
+
+      const ELEMENT_LABELS = {
+        tokoh: "Tokoh",
+        konflik: "Konflik",
+        penyelesaian: "Penyelesaian",
+        pesan: "Pesan"
+      };
+
+      const WRONG_CARD_TYPE_DESC = {
+        tokoh: "Itu siapa tokoh yang terlibat",
+        konflik: "Itu masalah yang dihadapi tokoh",
+        penyelesaian: "Itu cara tokoh menyelesaikan masalah",
+        pesan: "Itu pelajaran dari cerita"
+      };
+
+      const WRONG_TARGET_DESC = {
+        tokoh: "bukan siapa tokohnya.",
+        konflik: "bukan masalah utama tokoh.",
+        penyelesaian: "bukan tindakan yang mengakhiri masalah.",
+        pesan: "bukan pelajaran dari cerita."
+      };
+
+      const PROMPT_1 = {
+        tokoh: "Siapa yang terlibat langsung di kejadiannya?",
+        konflik: "Apa masalah yang dihadapi tokoh?",
+        penyelesaian: "Tindakan apa yang benar-benar mengakhiri masalah?",
+        pesan: "Apa pelajaran dari pilihan tokoh?"
+      };
+
+      const PROMPT_2 = {
+        tokoh: "Petunjuk: Cari nama hewan di cerita.",
+        konflik: "Petunjuk: Cari bagian saat Tuppy terlalu terburu-buru.",
+        penyelesaian: "Petunjuk: Cari tindakan Tuppy setelah ditolong Bumi.",
+        pesan: "Petunjuk: Cari kalimat terakhir yang berisi pelajaran Tuppy."
+      };
+
+      let mistakesPerBranch = { tokoh: 0, konflik: 0, penyelesaian: 0, pesan: 0 };
+      let solvedCount = 0;
+      let selectedCardId = null;
+
+      // State pointer drag
+      let activeDrag = null;
+
+      const olieAvatar = document.getElementById("olieAvatar");
+      const olieMessage = document.getElementById("olieMessage");
+      const feedbackBox = document.getElementById("feedbackBox");
+      const cardsGrid = document.getElementById("cardsGrid");
+      const basketSection = document.getElementById("basketSection");
+      const completionPanel = document.getElementById("completionPanel");
+      const reflectionInput = document.getElementById("reflectionInput");
+      const resetBtn = document.getElementById("resetBtn");
+      const dropSlots = Array.from(document.querySelectorAll(".drop-slot"));
+
+      function shuffle(array) {
+        const arr = array.slice();
+        for (let i = arr.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
+
+      function animateOlie(type) {
+        olieAvatar.classList.remove("nod", "tilt");
+        void olieAvatar.offsetWidth;
+        olieAvatar.classList.add(type);
+      }
+
+      function showFeedback(message, kind) {
+        feedbackBox.textContent = message;
+        feedbackBox.className = "feedback-alert show " + kind;
+      }
+
+      function clearFeedback() {
+        feedbackBox.textContent = "";
+        feedbackBox.className = "feedback-alert";
+      }
+
+      function highlightReadyTargets(isReady) {
+        dropSlots.forEach(slot => {
+          if (!slot.classList.contains("filled")) {
+            slot.classList.toggle("ready-target", isReady);
+          }
+        });
+      }
+
+      function selectCard(cardId) {
+        if (selectedCardId === cardId) {
+          selectedCardId = null;
+          updateCardSelectionUI();
+          highlightReadyTargets(false);
+          return;
+        }
+        selectedCardId = cardId;
+        updateCardSelectionUI();
+        highlightReadyTargets(true);
+      }
+
+      function updateCardSelectionUI() {
+        const cards = cardsGrid.querySelectorAll(".evidence-card");
+        cards.forEach(btn => {
+          const isSel = btn.dataset.cardId === selectedCardId;
+          btn.classList.toggle("selected", isSel);
+          btn.setAttribute("aria-pressed", isSel ? "true" : "false");
+        });
+      }
+
+      function createSparkles(slotEl) {
+        const burst = document.createElement("div");
+        burst.className = "sparkle-burst";
+        burst.setAttribute("aria-hidden", "true");
+        const angles = [0, 45, 90, 135, 180, 225, 270, 315];
+        angles.forEach(deg => {
+          const dot = document.createElement("span");
+          dot.className = "sparkle-dot";
+          const rad = (deg * Math.PI) / 180;
+          const dist = 36 + Math.random() * 16;
+          dot.style.setProperty("--dx", Math.cos(rad) * dist + "px");
+          dot.style.setProperty("--dy", Math.sin(rad) * dist + "px");
+          burst.appendChild(dot);
+        });
+        slotEl.appendChild(burst);
+        setTimeout(() => burst.remove(), 650);
+      }
+
+      function handleDropAttempt(cardId, targetElement) {
+        const slot = dropSlots.find(s => s.dataset.target === targetElement);
+        if (!slot || slot.classList.contains("filled")) return;
+
+        const cardData = CARDS_DATA.find(c => c.id === cardId);
+        const cardBtn = cardsGrid.querySelector(`[data-card-id="${cardId}"]`);
+        if (!cardData || !cardBtn) return;
+
+        // Bersihkan seleksi
+        selectedCardId = null;
+        updateCardSelectionUI();
+        highlightReadyTargets(false);
+
+        // Cek kebenaran
+        if (!cardData.isDistractor && cardData.type === targetElement) {
+          // BENAR
+          slot.classList.add("filled");
+          slot.dataset.element = targetElement;
+          slot.textContent = cardData.text;
+          slot.setAttribute("aria-label", `Dahan ${ELEMENT_LABELS[targetElement]} terisi: ${cardData.text}`);
+          slot.disabled = true;
+
+          const row = document.getElementById("row-" + targetElement);
+          row.classList.add("solved-" + targetElement);
+
+          createSparkles(slot);
+          cardBtn.remove();
+
+          solvedCount++;
+          animateOlie("nod");
+
+          if (solvedCount === 4) {
+            olieMessage.textContent = "Kolom Kiki akan kamu isi sendiri di tahap latihan.";
+            showFeedback("Hebat! Semua bukti cerita Tuppy sudah terpasang di dahan yang tepat.", "success");
+            basketSection.style.display = "none";
+            completionPanel.classList.add("show");
+          } else {
+            olieMessage.textContent = "Bagus! Lanjutkan mencocokkan bukti lainnya.";
+            showFeedback(`Tepat! Itu adalah bukti ${ELEMENT_LABELS[targetElement]} cerita Tuppy.`, "success");
+          }
+          return;
+        }
+
+        // SALAH
+        mistakesPerBranch[targetElement] += 1;
+        const mistakeCount = mistakesPerBranch[targetElement];
+
+        cardBtn.classList.remove("shake");
+        void cardBtn.offsetWidth;
+        cardBtn.classList.add("shake");
+        animateOlie("tilt");
+
+        // Susun pesan jenis kesalahan
+        let errorTypeMsg = "";
+        if (cardData.isDistractor) {
+          if (cardData.id === "c5" && targetElement === "tokoh") {
+            errorTypeMsg = "Itu tempat (latar), bukan tokoh.";
+          } else if (cardData.id === "c5") {
+            errorTypeMsg = `Itu tempat (latar), ${WRONG_TARGET_DESC[targetElement]}`;
+          } else {
+            errorTypeMsg = cardData.distractorFeedback;
+          }
+        } else {
+          errorTypeMsg = `${WRONG_CARD_TYPE_DESC[cardData.type]}, ${WRONG_TARGET_DESC[targetElement]}`;
+        }
+
+        // Pertanyaan pemantik / petunjuk sesuai jumlah salah di dahan ini
+        const hintMsg = mistakeCount === 1 ? PROMPT_1[targetElement] : PROMPT_2[targetElement];
+
+        olieMessage.textContent = hintMsg;
+        showFeedback(errorTypeMsg, "warn");
+      }
+
+      function setupPointerDrag(cardBtn) {
+        cardBtn.addEventListener("pointerdown", function (e) {
+          if (e.button !== 0 && e.pointerType === "mouse") return;
+
+          const rect = cardBtn.getBoundingClientRect();
+          activeDrag = {
+            cardId: cardBtn.dataset.cardId,
+            cardBtn: cardBtn,
+            startX: e.clientX,
+            startY: e.clientY,
+            offsetX: e.clientX - rect.left,
+            offsetY: e.clientY - rect.top,
+            moved: false,
+            clone: null,
+            hoveredSlot: null
+          };
+
+          cardBtn.setPointerCapture(e.pointerId);
+        });
+
+        cardBtn.addEventListener("pointermove", function (e) {
+          if (!activeDrag || activeDrag.cardBtn !== cardBtn) return;
+
+          const dx = e.clientX - activeDrag.startX;
+          const dy = e.clientY - activeDrag.startY;
+
+          if (!activeDrag.moved && Math.hypot(dx, dy) > 6) {
+            activeDrag.moved = true;
+            selectedCardId = null;
+            updateCardSelectionUI();
+            highlightReadyTargets(true);
+
+            const clone = cardBtn.cloneNode(true);
+            clone.classList.add("drag-clone");
+            clone.style.width = cardBtn.offsetWidth + "px";
+            document.body.appendChild(clone);
+            activeDrag.clone = clone;
+            cardBtn.classList.add("dragging-source");
+          }
+
+          if (activeDrag.moved && activeDrag.clone) {
+            activeDrag.clone.style.left = (e.clientX - activeDrag.offsetX) + "px";
+            activeDrag.clone.style.top = (e.clientY - activeDrag.offsetY) + "px";
+
+            // Deteksi target di bawah pointer
+            const elUnder = document.elementFromPoint(e.clientX, e.clientY);
+            const targetSlot = elUnder ? elUnder.closest(".drop-slot") : null;
+
+            if (activeDrag.hoveredSlot && activeDrag.hoveredSlot !== targetSlot) {
+              activeDrag.hoveredSlot.classList.remove("hover-target");
+            }
+            if (targetSlot && !targetSlot.classList.contains("filled")) {
+              targetSlot.classList.add("hover-target");
+              activeDrag.hoveredSlot = targetSlot;
+            } else {
+              activeDrag.hoveredSlot = null;
+            }
+          }
+        });
+
+        function endDrag(e) {
+          if (!activeDrag || activeDrag.cardBtn !== cardBtn) return;
+
+          const wasMoved = activeDrag.moved;
+          const targetSlot = activeDrag.hoveredSlot;
+          const cardId = activeDrag.cardId;
+
+          if (activeDrag.clone) {
+            activeDrag.clone.remove();
+          }
+          cardBtn.classList.remove("dragging-source");
+          dropSlots.forEach(s => s.classList.remove("hover-target"));
+
+          activeDrag = null;
+
+          if (wasMoved) {
+            highlightReadyTargets(false);
+            if (targetSlot) {
+              handleDropAttempt(cardId, targetSlot.dataset.target);
+            }
+          } else {
+            // Ketuk / klik biasa -> mode pilih kartu
+            selectCard(cardId);
+          }
+        }
+
+        cardBtn.addEventListener("pointerup", endDrag);
+        cardBtn.addEventListener("pointercancel", endDrag);
+
+        // Dukungan tombol Enter / Spasi lewat keyboard
+        cardBtn.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            selectCard(cardBtn.dataset.cardId);
+          }
+        });
+      }
+
+      // Klik / ketuk / Enter pada dahan target
+      dropSlots.forEach(slot => {
+        slot.addEventListener("click", function () {
+          if (slot.classList.contains("filled")) return;
+          if (selectedCardId) {
+            handleDropAttempt(selectedCardId, slot.dataset.target);
+          } else {
+            showFeedback("Pilih dulu satu kartu dari keranjang daun di bawah.", "warn");
+          }
+        });
+      });
+
+      function renderCards() {
+        cardsGrid.innerHTML = "";
+        const shuffled = shuffle(CARDS_DATA);
+        shuffled.forEach(card => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "evidence-card";
+          btn.dataset.cardId = card.id;
+          btn.setAttribute("aria-pressed", "false");
+          btn.setAttribute("aria-label", `Kartu bukti: ${card.text}`);
+          btn.textContent = card.text;
+          setupPointerDrag(btn);
+          cardsGrid.appendChild(btn);
+        });
+      }
+
+      function initGame() {
+        mistakesPerBranch = { tokoh: 0, konflik: 0, penyelesaian: 0, pesan: 0 };
+        solvedCount = 0;
+        selectedCardId = null;
+
+        dropSlots.forEach(slot => {
+          const el = slot.dataset.target;
+          slot.className = "drop-slot";
+          slot.disabled = false;
+          delete slot.dataset.element;
+          slot.textContent = `Letakkan kartu ${ELEMENT_LABELS[el]} di sini`;
+          slot.setAttribute("aria-label", `Dahan ${ELEMENT_LABELS[el]} Cerita 1 Tuppy, kosong. Pilih kartu lalu tekan di sini.`);
+
+          const row = document.getElementById("row-" + el);
+          row.className = "branch-row";
+        });
+
+        olieMessage.textContent = "Cari bukti dari cerita Tuppy. Seret kartu ke dahan yang tepat.";
+        clearFeedback();
+        reflectionInput.value = "";
+        completionPanel.classList.remove("show");
+        basketSection.style.display = "block";
+        renderCards();
+      }
+
+      resetBtn.addEventListener("click", initGame);
+
+      // Mulai permainan
+      initGame();
+    })();
+  </script>
+</body>
+</html>
