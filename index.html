@@ -128,7 +128,6 @@
       border: 2px solid var(--primary);
     }
 
-    /* Bilah Kemajuan */
     .progress-pills {
       display: flex;
       flex-wrap: wrap;
@@ -248,7 +247,6 @@
       display: none !important;
     }
 
-    /* Kartu Tampilan / Konten */
     .stage-card {
       background: #FFFFFF;
       border-radius: 24px;
@@ -260,7 +258,6 @@
       gap: 16px;
     }
 
-    /* Layar Identitas */
     .identity-form {
       display: flex;
       flex-direction: column;
@@ -296,7 +293,6 @@
       box-shadow: 0 0 0 4px rgba(122, 46, 120, 0.2);
     }
 
-    /* Tahap 1: Tabel Pohon */
     .tree-wrapper {
       position: relative;
       background: #FAF8F3;
@@ -307,8 +303,8 @@
 
     .table-header {
       display: grid;
-      grid-template-columns: 155px 1fr 1fr;
-      gap: 12px;
+      grid-template-columns: 140px 1fr 1fr;
+      gap: 10px;
       margin-bottom: 12px;
     }
 
@@ -319,7 +315,7 @@
       padding: 10px;
       text-align: center;
       font-weight: 800;
-      font-size: 18px;
+      font-size: 17px;
     }
 
     .branches-list {
@@ -330,8 +326,8 @@
 
     .branch-row {
       display: grid;
-      grid-template-columns: 155px 1fr 1fr;
-      gap: 12px;
+      grid-template-columns: 140px 1fr 1fr;
+      gap: 10px;
       align-items: stretch;
       background: #FFFFFF;
       border: 2px solid #D9CEBE;
@@ -349,13 +345,13 @@
       border-radius: 12px;
       padding: 8px;
       font-weight: 800;
-      font-size: 18px;
+      font-size: 17px;
       border-width: 3px;
       border-style: solid;
     }
 
     .element-tag small {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       opacity: 0.85;
     }
@@ -375,18 +371,13 @@
       justify-content: center;
       padding: 10px;
       text-align: center;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
       color: #52607A;
       cursor: pointer;
       position: relative;
       font-family: inherit;
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-
-    .drop-slot:focus-visible {
-      outline: 4px solid var(--primary);
-      outline-offset: 2px;
     }
 
     .drop-slot.ready-target:not(.filled),
@@ -434,15 +425,8 @@
       justify-content: center;
       padding: 10px;
       text-align: center;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
-    }
-
-    .kiki-cell.mystery {
-      font-size: 24px;
-      font-weight: 800;
-      color: #64748B;
-      background: #EEF2F6;
     }
 
     /* Keranjang Kartu */
@@ -465,7 +449,7 @@
 
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 10px;
     }
 
@@ -475,7 +459,7 @@
       border-radius: 18px 6px 18px 6px;
       padding: 12px 14px;
       font-family: inherit;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
       color: var(--text-main);
       text-align: left;
@@ -544,7 +528,6 @@
       margin: 0;
     }
 
-    /* Kotak Informasi / Refleksi */
     .theme-box {
       background: var(--pesan-bg);
       border: 3px solid var(--pesan-border);
@@ -581,11 +564,6 @@
       resize: vertical;
     }
 
-    .reflection-box textarea:focus {
-      outline: 3px solid var(--primary);
-      border-color: var(--primary);
-    }
-
     .btn-primary {
       align-self: flex-start;
       background: var(--primary);
@@ -615,17 +593,11 @@
       cursor: not-allowed;
     }
 
-    .btn-primary:focus-visible {
-      outline: 4px solid var(--text-main);
-      outline-offset: 2px;
-    }
-
     @keyframes fadeSlideUp {
       0% { opacity: 0; transform: translateY(10px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* TAHAP 2: Susun Dilema */
     .dilemma-paths {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -640,17 +612,6 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      transition: box-shadow 0.3s ease, border-color 0.3s ease;
-    }
-
-    .path-card.path-glow {
-      border-color: #17804F;
-      box-shadow: 0 0 18px rgba(23, 128, 79, 0.3);
-    }
-
-    .path-card.branch-crack {
-      animation: cardShake 0.45s ease-in-out;
-      border-color: #C93B2E;
     }
 
     .path-title {
@@ -674,14 +635,13 @@
       justify-content: center;
       padding: 10px;
       text-align: center;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 700;
       cursor: pointer;
       position: relative;
       font-family: inherit;
     }
 
-    /* TAHAP 3: Cek Paham & Bintang */
     .star-counter-top {
       display: inline-flex;
       align-items: center;
@@ -731,11 +691,6 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
-    .cave-box:focus-visible {
-      outline: 4px solid var(--primary);
-      outline-offset: 2px;
-    }
-
     .cave-dilema { background: var(--konflik-bg); border-color: var(--konflik-border); }
     .cave-bukan { background: var(--penyelesaian-bg); border-color: var(--penyelesaian-border); }
     .cave-tema { background: var(--tokoh-bg); border-color: var(--tokoh-border); }
@@ -766,13 +721,12 @@
     .cave-placeholder {
       margin: auto;
       text-align: center;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       color: #64748B;
       pointer-events: none;
     }
 
-    /* Tombol Guru di Pojok Kanan Bawah */
     .teacher-trigger {
       position: fixed;
       right: 12px;
@@ -798,7 +752,6 @@
       border-color: var(--primary);
     }
 
-    /* Modal Guru */
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -837,11 +790,6 @@
       padding-bottom: 12px;
     }
 
-    .modal-header h2 {
-      font-size: 21px;
-      color: var(--primary);
-    }
-
     .table-container {
       overflow-x: auto;
     }
@@ -861,10 +809,9 @@
     table.teacher-table th {
       background: #F1F5F9;
       font-weight: 800;
-      color: var(--text-main);
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 820px) {
       .table-header, .branch-row, .dilemma-paths, .caves-grid {
         grid-template-columns: 1fr;
       }
@@ -964,8 +911,8 @@
       </form>
     </section>
 
-    <!-- TAHAP 1: BAGIAN A4 (COCOKKAN BUKTI) -->
-    <section class="stage-card hidden" id="screenA4" aria-label="Tahap 1 Cocokkan Bukti">
+    <!-- TAHAP 1: BAGIAN A4 (COCOKKAN BUKTI TUPPY & KIKI) -->
+    <section class="stage-card hidden" id="screenA4" aria-label="Tahap 1 Cocokkan Bukti Tuppy dan Kiki">
       <div class="tree-wrapper">
         <div class="table-header" aria-hidden="true">
           <div class="col-title">Unsur Cerita</div>
@@ -976,29 +923,29 @@
         <div class="branches-list" id="a4Branches">
           <div class="branch-row" id="a4-row-tokoh">
             <div class="element-tag el-tokoh"><span>Tokoh</span><small>Biru</small></div>
-            <button type="button" class="drop-slot" data-target="tokoh" aria-label="Dahan Tokoh Cerita 1 Tuppy, kosong.">Letakkan kartu Tokoh di sini</button>
-            <div class="kiki-cell">Kiki si kelinci, Ruru si rusa, dan Kuro si kura-kura</div>
+            <button type="button" class="drop-slot" data-target="t_tokoh" aria-label="Dahan Tokoh Tuppy">Letakkan Tokoh Tuppy</button>
+            <button type="button" class="drop-slot" data-target="k_tokoh" aria-label="Dahan Tokoh Kiki">Letakkan Tokoh Kiki</button>
           </div>
           <div class="branch-row" id="a4-row-konflik">
             <div class="element-tag el-konflik"><span>Konflik</span><small>Merah Muda</small></div>
-            <button type="button" class="drop-slot" data-target="konflik" aria-label="Dahan Konflik Cerita 1 Tuppy, kosong.">Letakkan kartu Konflik di sini</button>
-            <div class="kiki-cell mystery">?</div>
+            <button type="button" class="drop-slot" data-target="t_konflik" aria-label="Dahan Konflik Tuppy">Letakkan Konflik Tuppy</button>
+            <button type="button" class="drop-slot" data-target="k_konflik" aria-label="Dahan Konflik Kiki">Letakkan Konflik Kiki</button>
           </div>
           <div class="branch-row" id="a4-row-penyelesaian">
             <div class="element-tag el-penyelesaian"><span>Penyelesaian</span><small>Hijau</small></div>
-            <button type="button" class="drop-slot" data-target="penyelesaian" aria-label="Dahan Penyelesaian Cerita 1 Tuppy, kosong.">Letakkan kartu Penyelesaian di sini</button>
-            <div class="kiki-cell mystery">?</div>
+            <button type="button" class="drop-slot" data-target="t_penyelesaian" aria-label="Dahan Penyelesaian Tuppy">Letakkan Penyelesaian Tuppy</button>
+            <button type="button" class="drop-slot" data-target="k_penyelesaian" aria-label="Dahan Penyelesaian Kiki">Letakkan Penyelesaian Kiki</button>
           </div>
           <div class="branch-row" id="a4-row-pesan">
             <div class="element-tag el-pesan"><span>Pesan</span><small>Kuning</small></div>
-            <button type="button" class="drop-slot" data-target="pesan" aria-label="Dahan Pesan Cerita 1 Tuppy, kosong.">Letakkan kartu Pesan di sini</button>
-            <div class="kiki-cell mystery">?</div>
+            <button type="button" class="drop-slot" data-target="t_pesan" aria-label="Dahan Pesan Tuppy">Letakkan Pesan Tuppy</button>
+            <button type="button" class="drop-slot" data-target="k_pesan" aria-label="Dahan Pesan Kiki">Letakkan Pesan Kiki</button>
           </div>
         </div>
       </div>
 
       <div class="basket-section" id="a4Basket">
-        <div class="basket-header">Keranjang Daun: Seret kartu bukti ke dahan yang tepat</div>
+        <div class="basket-header">Keranjang Daun: Seret kartu bukti ke tabel yang tepat (Tuppy & Kiki)</div>
         <div class="cards-grid" id="a4CardsGrid"></div>
       </div>
 
@@ -1099,14 +1046,13 @@
   <script>
     const APPS_SCRIPT_URL = "ISI_ALAMAT_APPS_SCRIPT_DI_SINI";
 
-    // Data Sesi Siswa
     const studentSession = {
       nama: "",
       kelas: "",
       currentStage: "identity",
       stats: {
-        A4: { bintang: 0, salah: 0, hint: 0, salahPerDahan: {tokoh:0, konflik:0, penyelesaian:0, pesan:0}, salahKartu: [], refleksi: "" },
-        A5: { bintang: 0, salah: 0, hint: 0, salahPerTempat: {p1_alasan:0, p1_akibat:0, p2_alasan:0, p2_akibat:0}, salahKartu: [], pemantik1: "", pemantik2: "" },
+        A4: { bintang: 0, salah: 0, hint: 0, salahPerSlot: {}, salahKartu: [], refleksi: "" },
+        A5: { bintang: 0, salah: 0, hint: 0, salahPerTempat: {}, salahKartu: [], pemantik1: "", pemantik2: "" },
         A6: { bintang: 0, salah: 0, hint: 0, s1Salah: 0, s2Salah: 0, isian: "" }
       }
     };
@@ -1177,7 +1123,6 @@
       }
     }
 
-    // --- LAYAR IDENTITAS ---
     document.getElementById("identityForm").addEventListener("submit", function(e) {
       e.preventDefault();
       const nama = document.getElementById("inputNama").value.trim();
@@ -1193,40 +1138,34 @@
       updatePills("pillA4");
 
       animateOlie("nod");
-      olieMessage.textContent = "Cari bukti dari cerita Tuppy. Seret kartu ke dahan yang tepat.";
+      olieMessage.textContent = "Cari bukti dari cerita Tuppy dan Kiki. Seret kartu ke dahan yang tepat.";
       initA4();
     });
 
     // ==========================================
-    // TAHAP 1: BAGIAN A4 (COCOKKAN BUKTI)
+    // TAHAP 1: BAGIAN A4 (TUPPY & KIKI)
     // ==========================================
     const a4Data = [
-      { id: "c1", text: "Tuppy si tupai dan Bumi si beruang", type: "tokoh", distractor: false },
-      { id: "c2", text: "Tuppy sangat ingin apel emas dan terburu-buru sampai tidak melihat dahan yang rapuh", type: "konflik", distractor: false },
-      { id: "c3", text: "Tuppy memeriksa dahan satu per satu dan memanjat dengan hati-hati", type: "penyelesaian", distractor: false },
-      { id: "c4", text: "Jangan terburu-buru, berhenti sejenak untuk berpikir sebelum bertindak", type: "pesan", distractor: false },
-      { id: "c5", text: "Hutan Ceria yang rindang", type: "distractor", distractor: true, fb: "Itu tempat (latar), bukan tokoh." },
-      { id: "c6", text: "Dahan patah dan Tuppy hampir jatuh", type: "distractor", distractor: true, fb: "Itu akibat dari tindakan Tuppy, bukan masalah atau pilihan sulitnya." }
+      // Cerita 1 (Tuppy)
+      { id: "tc1", text: "Tuppy si tupai dan Bumi si beruang", target: "t_tokoh", type: "tokoh" },
+      { id: "tc2", text: "Tuppy sangat ingin apel emas dan terburu-buru sampai tidak melihat dahan yang rapuh", target: "t_konflik", type: "konflik" },
+      { id: "tc3", text: "Tuppy memeriksa dahan satu per satu dan memanjat dengan hati-hati", target: "t_penyelesaian", type: "penyelesaian" },
+      { id: "tc4", text: "Jangan terburu-buru, berhenti sejenak untuk berpikir sebelum bertindak", target: "t_pesan", type: "pesan" },
+
+      // Cerita 2 (Kiki)
+      { id: "kc1", text: "Kiki si kelinci, Ruru si rusa, dan Kuro si kura-kura", target: "k_tokoh", type: "tokoh" },
+      { id: "kc2", text: "Kiki menemukan kebun wortel lebat tapi bimbang dibagikan atau disimpan sendiri", target: "k_konflik", type: "konflik" },
+      { id: "kc3", text: "Kiki memutuskan membagikan wortel kepada teman-temannya yang lapar", target: "k_penyelesaian", type: "penyelesaian" },
+      { id: "kc4", text: "Berbagi lebih berharga daripada menyimpan semua sendiri", target: "k_pesan", type: "pesan" },
+
+      // Pengecoh
+      { id: "p1", text: "Hutan Ceria yang rindang", distractor: true, fb: "Itu tempat (latar), bukan unsur utama cerita." },
+      { id: "p2", text: "Dahan patah dan Tuppy hampir jatuh", distractor: true, fb: "Itu akibat peristiwa, bukan masalah utama." }
     ];
 
-    let a4Mistakes = { tokoh: 0, konflik: 0, penyelesaian: 0, pesan: 0 };
+    let a4MistakesCount = 0;
     let a4SolvedCount = 0;
     let a4SelectedCardId = null;
-    let a4FirstTry = { tokoh: true, konflik: true, penyelesaian: true, pesan: true };
-
-    const a4Prompts1 = {
-      tokoh: "Siapa yang terlibat langsung di kejadiannya?",
-      konflik: "Apa masalah yang dihadapi tokoh?",
-      penyelesaian: "Tindakan apa yang benar-benar mengakhiri masalah?",
-      pesan: "Apa pelajaran dari pilihan tokoh?"
-    };
-
-    const a4Prompts2 = {
-      tokoh: "Cari nama hewan di cerita.",
-      konflik: "Cari bagian saat Tuppy terlalu terburu-buru.",
-      penyelesaian: "Cari tindakan Tuppy setelah ditolong Bumi.",
-      pesan: "Cari kalimat terakhir yang berisi pelajaran Tuppy."
-    };
 
     function initA4() {
       const grid = document.getElementById("a4CardsGrid");
@@ -1249,76 +1188,57 @@
           if (a4SelectedCardId) {
             handleA4Drop(a4SelectedCardId, slot.dataset.target);
           } else {
-            showFeedback("Pilih dulu satu kartu dari keranjang daun di bawah.", "warn");
+            showFeedback("Pilih dulu satu kartu dari keranjang di bawah.", "warn");
           }
         });
       });
     }
 
-    function handleA4Drop(cardId, targetElement) {
+    function handleA4Drop(cardId, targetSlotKey) {
       const cardData = a4Data.find(c => c.id === cardId);
       const cardBtn = document.querySelector(`#screenA4 [data-card-id="${cardId}"]`);
-      const slot = document.querySelector(`#screenA4 [data-target="${targetElement}"]`);
+      const slot = document.querySelector(`#screenA4 [data-target="${targetSlotKey}"]`);
       if (!cardData || !cardBtn || !slot || slot.classList.contains("filled")) return;
 
       a4SelectedCardId = null;
       document.querySelectorAll(".evidence-card").forEach(c => c.classList.remove("selected"));
 
-      if (!cardData.distractor && cardData.type === targetElement) {
+      if (!cardData.distractor && cardData.target === targetSlotKey) {
         slot.classList.add("filled");
         slot.textContent = cardData.text;
         slot.disabled = true;
-        document.getElementById("a4-row-" + targetElement).classList.add("solved-" + targetElement);
         cardBtn.remove();
         a4SolvedCount++;
         animateOlie("nod");
 
-        if (a4FirstTry[targetElement]) {
-          studentSession.stats.A4.bintang++;
-        }
+        showFeedback("Tepat sekali! Kartu bukti terpasang di tempat yang benar.", "success");
 
-        showFeedback(`Tepat! Itu bukti ${targetElement} cerita Tuppy.`, "success");
-
-        if (a4SolvedCount === 4) {
-          studentSession.stats.A4.salah = Object.values(a4Mistakes).reduce((a,b)=>a+b, 0);
-          olieMessage.textContent = "Kolom Kiki akan kamu isi sendiri di tahap latihan.";
+        if (a4SolvedCount === 8) {
+          studentSession.stats.A4.bintang = a4MistakesCount === 0 ? 1 : 0;
+          studentSession.stats.A4.salah = a4MistakesCount;
+          olieMessage.textContent = "Hebat! Semua bukti Tuppy dan Kiki sudah lengkap.";
           document.getElementById("a4Basket").classList.add("hidden");
           document.getElementById("a4CompletionPanel").classList.remove("hidden");
           sendStageData("A4");
           markPillDone("pillA4");
         }
       } else {
-        a4Mistakes[targetElement]++;
-        a4FirstTry[targetElement] = false;
+        a4MistakesCount++;
         studentSession.stats.A4.salah++;
-        studentSession.stats.A4.salahPerDahan[targetElement]++;
         studentSession.stats.A4.salahKartu.push(cardData.text);
 
         cardBtn.classList.add("shake");
         setTimeout(() => cardBtn.classList.remove("shake"), 500);
         animateOlie("tilt");
 
-        let errText = "";
-        if (cardData.distractor) {
-          errText = cardData.fb;
-        } else {
-          const mapWrong = {
-            tokoh: "bukan siapa tokohnya.",
-            konflik: "bukan masalah utama tokoh.",
-            penyelesaian: "bukan tindakan yang mengakhiri masalah.",
-            pesan: "bukan pelajaran dari cerita."
-          };
-          errText = `Itu unsur ${cardData.type}, ${mapWrong[targetElement]}`;
-        }
-
+        let errText = cardData.distractor ? cardData.fb : "Kartu ini bukan untuk bagian/cerita tersebut. Coba perhatikan lagi!";
         showFeedback(errText, "warn");
-        const mCount = a4Mistakes[targetElement];
-        if (mCount === 1) {
+        if (a4MistakesCount === 1) {
           studentSession.stats.A4.hint++;
-          olieMessage.textContent = a4Prompts1[targetElement];
+          olieMessage.textContent = "Perhatikan kembali apakah itu untuk Cerita 1 (Tuppy) atau Cerita 2 (Kiki).";
         } else {
           studentSession.stats.A4.hint++;
-          olieMessage.textContent = a4Prompts2[targetElement];
+          olieMessage.textContent = "Petunjuk: Cocokkan apakah itu unsur Tokoh, Konflik, Penyelesaian, atau Pesan.";
         }
       }
     }
@@ -1358,7 +1278,7 @@
             Tuppy melihat apel emas di atas pohon dan harus memilih cara mengambilnya.
           </div>
           <div style="display:flex; justify-content:center; padding:20px;">
-            <svg width="180" height="180" viewBox="0 0 200 200" fill="none" aria-label="Ilustrasi Tuppy dan Pohon Apel Emas">
+            <svg width="180" height="180" viewBox="0 0 200 200" fill="none">
               <rect x="85" y="100" width="30" height="90" fill="#795032"/>
               <circle cx="100" cy="80" r="60" fill="#5D9C59"/>
               <circle cx="100" cy="50" r="14" fill="#FFD700" stroke="#DAA520" stroke-width="3"/>
@@ -1507,17 +1427,7 @@
         setTimeout(() => cardBtn.classList.remove("shake"), 500);
         animateOlie("tilt");
 
-        let errMsg = "";
-        if (cardData.distractor) {
-          errMsg = cardData.fb;
-        } else if (cardData.expect.includes("alasan") && slotExpect.includes("akibat")) {
-          errMsg = "Itu alasan (mengapa tokoh memilih), bukan akibat (yang terjadi sesudahnya).";
-        } else if (cardData.expect.includes("akibat") && slotExpect.includes("alasan")) {
-          errMsg = "Itu akibat, bukan alasan.";
-        } else {
-          errMsg = "Cek lagi: kartu ini cocok dengan pilihan yang mana?";
-        }
-
+        let errMsg = cardData.distractor ? cardData.fb : "Cek lagi kecocokan alasan dan akibat pilihan tersebut.";
         showFeedback(errMsg, "warn");
         if (a5MistakesCount === 1) {
           studentSession.stats.A5.hint++;
@@ -1661,7 +1571,7 @@
             updateA6PoolState(1);
           }, 500);
         });
-        showFeedback("Dilema = dua pilihan yang sama-sama punya alasan dan akibat. Menangkap seseorang itu satu tindakan, bukan pilihan sulit.", "warn");
+        showFeedback("Dilema = dua pilihan yang sama-sama punya alasan dan akibat.", "warn");
         if (a6State.s1Attempts === 1) {
           studentSession.stats.A6.hint++;
           olieMessage.textContent = "Apa yang membuat tokoh sulit memilih?";
@@ -1751,7 +1661,7 @@
         }
         updateA6StarsUI();
         animateOlie("nod");
-        showFeedback("Tema adalah topik umum cerita. Pesan adalah pelajaran yang lahir dari pilihan tokoh.", "success");
+        showFeedback("Tema adalah topik umum cerita. Pesan adalah pelajaran dari pilihan tokoh.", "success");
         setTimeout(() => renderA6Sub3(), 1200);
       } else {
         a6State.s2First = false;
@@ -1766,7 +1676,7 @@
             updateA6PoolState(2);
           }, 500);
         });
-        showFeedback("Tema adalah topik umum cerita. Pesan adalah pelajaran yang lahir dari pilihan tokoh.", "warn");
+        showFeedback("Tema adalah topik umum cerita. Pesan adalah pelajaran dari pilihan tokoh.", "warn");
         if (a6State.s2Attempts === 1) {
           studentSession.stats.A6.hint++;
           olieMessage.textContent = "Mana yang sekadar topik umum, dan mana nasihat?";
@@ -1840,10 +1750,7 @@
       window.location.reload();
     });
 
-
-    // ==========================================
     // SISTEM DRAG & DROP POINTER EVENTS UNIVERSAL
-    // ==========================================
     function setupPointerDrag(cardEl, namespace, onDropSuccess) {
       let activeDrag = null;
 
@@ -1941,10 +1848,7 @@
       cardEl.addEventListener("pointercancel", endDrag);
     }
 
-
-    // ==========================================
-    // PANEL GURU (KODE GURU & REKAP)
-    // ==========================================
+    // PANEL GURU
     const teacherModal = document.getElementById("teacherModal");
     document.getElementById("openTeacherBtn").addEventListener("click", () => {
       teacherModal.classList.add("open");
@@ -2017,9 +1921,7 @@
       const tbody = document.getElementById("teacherTableBody");
       tbody.innerHTML = "";
 
-      const headers = barisData[0];
       const items = barisData.slice(1);
-
       if (items.length === 0) {
         tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:16px;">Belum ada data siswa yang tersimpan.</td></tr>`;
         return;
